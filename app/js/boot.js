@@ -2,6 +2,7 @@
 // in step with the saved progress. Hash routes: #/checklist, #/roadmap, #/missables,
 // #/planner and #/trophy-<id> (opens the checklist with that trophy's guide).
 // Every hash change re-renders, so a deep link always shows the right view.
+// Keyboard: pressing / anywhere focuses the search box.
 
 import { loadTrophyData, trophyById, KIND_FILTERS, KIND_LABELS } from './trophydata.js';
 import {
@@ -160,6 +161,14 @@ function wireToolbar() {
     selectedId = null;
     saveProgress(progress);
     renderAll();
+  });
+  // Pressing / focuses search from anywhere on the page (unless already typing).
+  document.addEventListener('keydown', (event) => {
+    if (event.key !== '/' || event.metaKey || event.ctrlKey || event.altKey) return;
+    const tag = (document.activeElement && document.activeElement.tagName) || '';
+    if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
+    event.preventDefault();
+    $('searchBox').focus();
   });
 }
 

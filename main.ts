@@ -1,18 +1,16 @@
 // Leonida Platinum — GTA VI trophy guide & tracker (Node 22, standard library only).
-// The guide is this directory's app/ folder: plain static files a browser opens at
-// app/index.html (ES modules, CSS, no build step), fully offline — it loads nothing
-// over the network, and its trophy list and guides live in app/data/trophies.json.
-// This program hands it in: it copies app/ and screenshots/ from beside this file
-// to /output and writes /output/dossier.json, the summary the judge reads (your
-// screenshots, the first load's files and bytes, and your source), with the vendored
-// make.fun library. Leave vendor/makefun-frontend.ts as it is: the scorer requires
-// dossier.json to be byte for byte what its own copy of that library writes.
-// Verification first: the trophy file must parse with all 55 guides, and
-// screenshots/ must hold 3 or 4 images — a failed verification stops the run.
+// The guide itself is the app/ folder beside this file: plain static files a browser
+// opens at app/index.html (ES modules and CSS, no build step), fully offline — it loads
+// nothing over the network, and its trophy list and guides live in app/data/trophies.json.
+// This program packages it: it copies app/ and screenshots/ from beside this file to
+// /output and writes /output/dossier.json, the summary the judge reads (your screenshots,
+// the first load's files and bytes, and your source), using the vendored make.fun library.
+// Leave vendor/makefun-frontend.ts untouched: the scorer requires dossier.json to be
+// byte for byte what its own copy of that library writes.
 //
-// Before copying, it verifies the two things the gate checks first: the trophy file
-// parses and names all 55 official trophies with a guide each, and screenshots/
-// holds 3 or 4 images. A failed verification stops the run with a plain error.
+// It verifies before it copies: the trophy file must parse with all 55 guides, and
+// screenshots/ must hold 3 or 4 images — a failed verification stops the run with a
+// plain error, before anything is written.
 //
 // Serve it locally with `node serve.ts`, then open http://localhost:8080.
 // Outside the grader's container, MAKEFUN_OUTPUT_DIR stands in for /output:

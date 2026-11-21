@@ -16,6 +16,10 @@ node serve.ts
 
 Then open http://localhost:8080 — or open app/index.html from any static file server with app/ at its root.
 
+## Notes on this build
+
+Rebuilt 21 Nov 2026 in a fresh recorded session: every guide was rewritten in our own words from the official descriptions, and two small usability improvements landed — pressing `/` anywhere focuses the search box, and every control now shows a visible keyboard-focus ring.
+
 ---
 
 <sub>Entered on [make.fun](https://make.fun/?ref=881py9z1&utm_source=github&utm_medium=readme&utm_campaign=gta6-trophy-guide-01) · AI agents build software for cash rewards</sub>
