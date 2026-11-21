@@ -1,30 +1,70 @@
-// Filters for the checklist: kind chips, grade, search, and the spoiler rule.
-export const KINDS = ['all', 'story', 'missable', 'collectibles', 'activities', 'online', 'completion'];
+// Filters: search text, kind, grade, sort order, spoiler masking and unearned-only.
+// The spoiler rule hides the name and description of an unearned STORY trophy;
+// earned story trophies, and every other kind, always show in full.
 
-// A story trophy is a spoiler until earned: with the spoiler setting on, its name and
-// description stay hidden in the list and only its grade shows.
-export function isSpoilerHidden(trophy, spoilerOn, earned) {
-  return spoilerOn && trophy.kind === 'story' && !earned.has(trophy.name);
+import { isEarned } from './store.js';
+import { isMissable, kindOf } from './trophydata.js';
+
+export function blankFilterState() {
+  return { query: '', kind: 'all', grade: 'all', sort: 'roadmap', spoiler: false, unearnedOnly: false };
 }
 
-export function applyFilters(trophies, { kind, grade, query, spoilerOn, earned }) {
-  const q = query.trim().toLowerCase();
-  return trophies.filter((t) => {
-    if (kind === 'missable' && !t.missable) return false;
-    if (kind === 'online') return false; // No online trophies in this list: all 55 are offline.
-    if (kind !== 'all' && kind !== 'missable' && t.kind !== kind) return false;
-    if (grade !== 'all' && t.grade !== grade) return false;
-    if (q && !`${t.name} ${t.description}`.toLowerCase().includes(q)) return false;
+export function spoilerHides(state, trophy, progress) {
+  if (!state.spoiler) return false;
+  if (isEarned(progress, trophy.id)) return false;
+  return kindOf(trophy) === 'story';
+}
+
+export function matchesKind(state, trophy) {
+  if (state.kind === 'all') return true;
+  if (state.kind === 'missable') return isMissable(trophy);
+  if (state.kind === 'online') return false; // This list has no online trophies.
+  return kindOf(trophy) === state.kind;
+}
+
+export function matchesQuery(state, trophy) {
+  const q = state.query.trim().toLowerCase();
+  if (!q) return true;
+  const haystack = [trophy.name, trophy.description, trophy.guide || '', (trophy.steps || []).join(' ')]
+    .join(' ')
+    .toLowerCase();
+  return q.split(/\s+/).every((word) => haystack.includes(word));
+}
+
+export function sortTrophies(state, trophies) {
+  const gradeRank = { platinum: 0, gold: 1, silver: 2, bronze: 3 };
+  const list = [...trophies];
+  if (state.sort === 'name') {
+    list.sort((a, b) => a.name.localeCompare(b.name));
+  } else if (state.sort === 'grade') {
+    list.sort((a, b) => gradeRank[a.grade] - gradeRank[b.grade] || a.name.localeCompare(b.name));
+  } else if (state.sort === 'earned') {
+    list.sort((a, b) => (b._earned ? 1 : 0) - (a._earned ? 1 : 0) || a.stage - b.stage || a.id - b.id);
+  } else {
+    list.sort((a, b) => a.stage - b.stage || a.id - b.id);
+  }
+  return list;
+}
+
+export function applyFilters(state, trophies, progress) {
+  const filtered = trophies.filter((t) => {
+    if (state.grade !== 'all' && t.grade !== state.grade) return false;
+    if (!matchesKind(state, t)) return false;
+    if (state.unearnedOnly && isEarned(progress, t.id)) return false;
+    if (!matchesQuery(state, t)) return false;
     return true;
   });
+  for (const t of filtered) t._earned = isEarned(progress, t.id);
+  return sortTrophies(state, filtered);
 }
 
-export function filterNoteFor({ kind, grade, query, shown, total, kindNotes }) {
-  if (kind === 'online') return 'Online: this list has no online trophies — all 55 are earned offline.';
+export function filterSummary(state, shown, total) {
   const parts = [];
-  if (kind !== 'all') parts.push(kindNotes[kind] ?? '');
-  if (grade !== 'all') parts.push(`Grade: ${grade}.`);
-  if (query.trim()) parts.push(`Matching “${query.trim()}”.`);
-  parts.push(`Showing ${shown} of ${total} trophies.`);
-  return parts.join(' ');
+  if (state.kind !== 'all') parts.push(state.kind === 'missable' ? 'missable' : state.kind);
+  if (state.grade !== 'all') parts.push(state.grade);
+  if (state.query.trim()) parts.push(`matching “${state.query.trim()}”`);
+  if (state.unearnedOnly) parts.push('unearned only');
+  if (state.spoiler) parts.push('spoilers hidden');
+  const label = parts.length ? parts.join(' · ') : 'all trophies';
+  return `${shown} of ${total} — ${label}`;
 }
