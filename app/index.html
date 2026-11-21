@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Leonida Platinum — GTA VI Trophy Guide &amp; Tracker</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <div class="titleblock">
+    <h1>Leonida Platinum</h1>
+    <p class="subtitle">The GTA VI trophy guide &amp; tracker — all 55 PlayStation 5 trophies, offline, in your own words with sources.</p>
+    <p class="counts">55 trophies · 1 platinum · 2 gold · 6 silver · 46 bronze · 7 missable</p>
+  </div>
+  <div class="progressbox" aria-label="Progress to platinum">
+    <div class="bignum"><span id="earnedCount">0</span><span class="of"> / 55 earned</span></div>
+    <div class="bar"><div id="barFill" class="barfill"></div></div>
+    <p id="progressLine" class="progressline">0% to the platinum</p>
+  </div>
+</header>
+
+<nav class="tabs" aria-label="Views">
+  <button type="button" class="tab active" data-view="checklist">Checklist</button>
+  <button type="button" class="tab" data-view="roadmap">Roadmap to platinum</button>
+  <button type="button" class="tab" data-view="missables">Missable trophies <span id="missableTabCount" class="pill">7</span></button>
+</nav>
+
+<section id="view-checklist" class="view">
+  <div class="controls">
+    <label class="search">Search <input id="search" type="search" placeholder="Trophy name or description…" autocomplete="off"></label>
+    <div class="chips" id="kindChips" role="group" aria-label="Filter by kind"></div>
+    <label class="grade">Grade
+      <select id="grade">
+        <option value="all">All grades</option>
+        <option value="platinum">Platinum</option>
+        <option value="gold">Gold</option>
+        <option value="silver">Silver</option>
+        <option value="bronze">Bronze</option>
+      </select>
+    </label>
+    <label class="spoiler"><input id="spoiler" type="checkbox"> Hide story spoilers</label>
+    <button id="exportBtn" type="button">Export progress</button>
+    <label class="importbtn">Import progress <input id="importFile" type="file" accept="application/json,.json"></label>
+    <button id="resetBtn" type="button" class="quiet">Reset</button>
+  </div>
+  <p id="filterNote" class="filternote"></p>
+  <div class="layout">
+    <div class="listwrap">
+      <table>
+        <thead><tr><th class="c-earned">Earned</th><th>Trophy</th><th class="c-grade">Grade</th><th class="c-kind">Kind</th></tr></thead>
+        <tbody id="rows"></tbody>
+      </table>
+      <p id="emptyNote" class="empty" hidden>No trophies match these filters.</p>
+    </div>
+    <aside id="detail" class="detail" aria-label="Trophy guide"></aside>
+  </div>
+</section>
+
+<section id="view-roadmap" class="view" hidden>
+  <h2 id="roadmapTitle">Roadmap to the platinum</h2>
+  <p id="roadmapSub" class="lede"></p>
+  <ol id="roadmapStages" class="stages"></ol>
+</section>
+
+<section id="view-missables" class="view" hidden>
+  <h2>Missable trophies — do these before the window closes</h2>
+  <p id="missableIntro" class="lede"></p>
+  <p id="missableMethod" class="method"></p>
+  <div id="missableList" class="missablelist"></div>
+</section>
+
+<footer>
+  <p><strong>Sources.</strong> Every name, description and grade is as PlayStation publishes it — the official list via <a href="https://www.exophase.com/game/grand-theft-auto-vi-psn/trophies/">Exophase</a> and <a href="https://psnprofiles.com/trophies/43531-grand-theft-auto-vi">PSNProfiles</a> (the two agree on all 55). Each guide is written for this entry, in our own words, from the official description; where a description does not pin a place or trigger down, the guide says so plainly instead of inventing one.</p>
+  <p>Works offline — this page loads nothing from the network. Progress is saved in your browser (localStorage) and can be exported to a file and imported back. No Rockstar artwork or logo is used anywhere in this guide; the look is our own.</p>
+</footer>
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
