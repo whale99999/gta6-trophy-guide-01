@@ -7,6 +7,8 @@
 // screenshots, the first load's files and bytes, and your source), with the vendored
 // make.fun library. Leave vendor/makefun-frontend.ts as it is: the scorer requires
 // dossier.json to be byte for byte what its own copy of that library writes.
+// Verification first: the trophy file must parse with all 55 guides, and
+// screenshots/ must hold 3 or 4 images — a failed verification stops the run.
 //
 // Before copying, it verifies the two things the gate checks first: the trophy file
 // parses and names all 55 official trophies with a guide each, and screenshots/

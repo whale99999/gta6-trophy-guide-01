@@ -1,6 +1,7 @@
 // Checklist view: the trophy rows and the detail pane with the selected trophy's guide.
 // A row shows the official name, description and grade; the detail pane adds the guide,
 // its steps, the missable window, the PSN counter, sources and a personal note.
+// A spoiler-hidden row still selects: the pane then shows the masked view.
 
 import { getCount, getNote, isEarned, setCount, setEarned, setNote } from './store.js';
 import { gradeLabel, kindOf, KIND_LABELS } from './trophydata.js';

@@ -1,6 +1,7 @@
 // Filters: search text, kind, grade, sort order, spoiler masking and unearned-only.
 // The spoiler rule hides the name and description of an unearned STORY trophy;
 // earned story trophies, and every other kind, always show in full.
+// This list has no online trophies, so the online filter honestly matches none.
 
 import { isEarned } from './store.js';
 import { isMissable, kindOf } from './trophydata.js';

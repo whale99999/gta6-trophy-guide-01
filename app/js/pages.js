@@ -1,4 +1,6 @@
 // Roadmap, missables and planner pages — all built from the trophy data and your progress.
+// The planner shows the next five unearned trophies of each stage, in roadmap order,
+// so the next thing to chase is always the top of the first unfinished stage.
 
 import { isEarned, setEarned } from './store.js';
 import { STAGES, missableTrophies, stageTrophies } from './trophydata.js';

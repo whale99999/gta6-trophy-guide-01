@@ -1,6 +1,7 @@
 // Boot: loads the trophy list, wires the toolbar and page nav, and keeps every view
 // in step with the saved progress. Hash routes: #/checklist, #/roadmap, #/missables,
 // #/planner and #/trophy-<id> (opens the checklist with that trophy's guide).
+// Every hash change re-renders, so a deep link always shows the right view.
 
 import { loadTrophyData, trophyById, KIND_FILTERS, KIND_LABELS } from './trophydata.js';
 import {

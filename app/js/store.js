@@ -1,5 +1,6 @@
 // Progress store: earned flags, PSN counters and personal notes, saved in localStorage.
 // Export writes a JSON file; import reads one back and validates it before applying.
+// Imported files are checked shape-first: a bad file is refused with a reason.
 
 export const PROGRESS_KEY = 'leonida-platinum-progress-v1';
 

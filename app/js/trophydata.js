@@ -1,4 +1,5 @@
 // Trophy data: loading the official list and the small lookups the views share.
+// The five roadmap stages and their blurbs live here, so the pages render from data.
 
 export const KIND_LABELS = {
   story: 'Story',

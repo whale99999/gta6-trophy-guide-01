@@ -6,6 +6,8 @@
 
 Leonida Platinum — the best offline guide and tracker for all 55 PlayStation 5 trophies of Grand Theft Auto VI: every trophy with its official name, description and grade, a guide in our own words that cites its sources, a five-stage roadmap to the platinum, the 7 missable trophies flagged with their closing windows, a Next up planner, and a checklist saved in the browser with export/import, filters by kind and grade, search, and a spoiler setting that hides story trophies until earned. Works with the network off.
 
+The guide is honest about what is not yet known: where an official description does not pin a place or trigger down, the guide says so instead of inventing one.
+
 ## Run it
 
 ```sh

@@ -1,6 +1,7 @@
 // Leonida Platinum — tiny static file server for local testing (Node 22, standard
 // library only). Serves app/ at its root on http://localhost:8080, so the guide runs
 // exactly as it would from any static host. Run: `node serve.ts`
+// Paths are resolved inside app/ only; anything else answers 404.
 import { createReadStream, existsSync, statSync } from 'node:fs';
 import { createServer } from 'node:http';
 import { extname, join, normalize, resolve } from 'node:path';
